@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+$main-bg-color: white;
+$main-text-color: #202124;
+$main-accent-color: rgb(0, 0, 0, 0.2);
+
+body {
+    font-family: "Roboto", sans-serif;
+    color: $main-text-color;
+    background: $main-bg-color;
+}
+
+.app {
+    padding-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.wrap {
+    width: 600px;
+}
+
+.list {
+    border: 1px solid $main-text-color;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px $main-accent-color;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        height: 32px;
+    }
+
+    &__title-wrap {
+        .fa-pencil-alt {
+            display: none;
+        }
+
+        &:hover .fa-pencil-alt {
+            display: inline-block;
+        }
+    }
+
+    &__title {
+        font-weight: 700;
+        margin-right: 10px;
+    }
+
+    &__body {
+        padding: 12px 16px;
+    }
+
+    &__list__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .fa-plus {
+            width: 14px;
+        }
+    }
+
+    &__item-text {
+        width: calc(100% - 56px);
+        border: none;
+    }
+
+    &__item-btn {
+        right: 0;
+        width: 30px;
+        padding: 0;
+        font-size: 14px;
+        background: none;
+        border: 1px solid $main-text-color;
+
+        &:hover {
+            background: $main-accent-color;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 4px 0;
+    }
+
+    &__footer-options {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        max-width: 384px;
+
+        .fas::before {
+            width: 34px;
+            height: 34px;
+            margin: 8px 9px;
+        }
+    }
+
+    &__footer-btn {
+        height: 36px;
+        width: 106px;
+        padding: 0 24px;
+        margin-right: 15px;
+        background: none;
+        border: none;
+        font-weight: 700;
+        transition: 0.2s;
+
+        &:hover {
+            background: $main-accent-color;
+        }
+    }
+}
+
+.fas:hover {
+    background: $main-accent-color;
+}

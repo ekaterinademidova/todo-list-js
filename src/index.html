@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <title>TODO-list</title>
 </head>
 <body>
-    
+    <div class="app">
+        <div class="wrap">
+            <div class="list">
+                <div class="list__header">
+                    <div class="list__title-wrap">
+                        <span class="list__title">
+                            New List
+                        </span>
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <i class="fas fa-thumbtack"></i>
+                </div>
+                <div class="list__body">
+                    <div class="list__item">
+                        <i class="fas fa-plus"></i>
+                        <input type="text" class="list__item-text" placeholder="List item">
+                        <input type="button" class="list__item-btn" value="Add">
+                    </div>
+                </div>
+                <div class="list__footer">
+                    <!-- Решить вопрос с :hover background. -->
+                    <div class="list__footer-options">
+                        <i class="fas fa-bell"></i>
+                        <i class="fas fa-user-plus"></i>
+                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-image"></i>
+                        <i class="fas fa-archive"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                        <i class="fas fa-arrow-left"></i>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <input type="button" class="list__footer-btn" value="Close">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
