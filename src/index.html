@@ -13,10 +13,16 @@
             <div class="list">
                 <div class="list__header">
                     <div class="list__title-wrap">
-                        <span class="list__title">
-                            New List
-                        </span>
+                        <input type="text" class="list__title" value="New List" readonly>
                         <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="list__themes">
+                        <div class="list__themes-item active">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="list__themes-item">
+                            <i class="fas fa-moon"></i>
+                        </div>
                     </div>
                     <i class="fas fa-thumbtack"></i>
                 </div>
@@ -48,10 +54,16 @@
             <div class="list ready">
                 <div class="list__header">
                     <div class="list__title-wrap">
-                        <span class="list__title">
-                            Shopping list
-                        </span>
+                        <input type="text" class="list__title" value="Shopping list" readonly>
                         <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="list__themes">
+                        <div class="list__themes-item active">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="list__themes-item">
+                            <i class="fas fa-moon"></i>
+                        </div>
                     </div>
                     <i class="fas fa-thumbtack"></i>
                 </div>
@@ -64,46 +76,50 @@
                             <a href="#">Archived</a>
                         </li>
                     </ul>
-                    <div class="list__items">
-                        <div class="list__items-todo">
-                            <div class="list__item todo">
-                                <i class="fas fa-caret-right"></i>
-                                <p class="list__item-text">Ice cream</p>
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="list__item todo">
-                                <i class="fas fa-caret-right"></i>
-                                <p class="list__item-text">Chilli</p>
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="list__item todo">
-                                <i class="fas fa-caret-right"></i>
-                                <p class="list__item-text">Greeting card</p>
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-check"></i>
-                            </div>
+                    <!-- Спросить нужно ли делать один item со всеми кнопками, а в зависимоти 
+                        от класса (add, todo, done, arch) менять видимость определенных кнопок.-->
+                    <div class="list__items-todo">
+                        <div class="list__item todo">
+                            <i class="fas fa-square"></i>
+                            <input type="text" class="list__item-text" value="Ice cream" readonly>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
                         </div>
-                        <div class="list__items-done">
-                            <div class="list__item done">
-                                <i class="fas fa-check-square"></i>
-                                <p class="list__item-text">Tomatoes</p>
-                            </div>
-                            <div class="list__item done">
-                                <i class="fas fa-check-square"></i>
-                                <p class="list__item-text">Meat</p>
-                            </div>
-                            <div class="list__item done">
-                                <i class="fas fa-check-square"></i>
-                                <p class="list__item-text">Condiments</p>
-                            </div>
+                        <div class="list__item todo">
+                            <i class="fas fa-square"></i>
+                            <input type="text" class="list__item-text" value="Chilli" readonly>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <div class="list__item todo">
+                            <i class="fas fa-square"></i>
+                            <input type="text" class="list__item-text" value="Greeting card" readonly>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
                         </div>
                     </div>
                     <div class="list__item add">
                         <i class="fas fa-plus"></i>
                         <input type="text" class="list__item-text" placeholder="List item">
                         <i class="fas fa-angle-double-right"></i>
+                    </div>
+                    <div class="list__items-done">
+                        <div class="list__dropdown">
+                            <i class="fas fa-chevron-down"></i>
+                            <p class="list__dropdown-text">3 highlighted items</p>
+                        </div>
+                        <div class="list__item done">
+                            <i class="fas fa-check-square"></i>
+                            <input type="text" class="list__item-text" value="Tomatoes" readonly>
+                        </div>
+                        <div class="list__item done">
+                            <i class="fas fa-check-square"></i>
+                            <input type="text" class="list__item-text" value="Meat" readonly>
+                        </div>
+                        <div class="list__item done">
+                            <i class="fas fa-check-square"></i>
+                            <input type="text" class="list__item-text" value="Condiments" readonly>
+                        </div>
                     </div>
                 </div>
                 <div class="list__footer">
@@ -128,10 +144,16 @@
             <div class="list ready">
                 <div class="list__header">
                     <div class="list__title-wrap">
-                        <span class="list__title">
-                            Shopping list
-                        </span>
+                        <input type="text" class="list__title" value="Shopping list" readonly>
                         <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="list__themes">
+                        <div class="list__themes-item active">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="list__themes-item">
+                            <i class="fas fa-moon"></i>
+                        </div>
                     </div>
                     <i class="fas fa-thumbtack"></i>
                 </div>
@@ -147,11 +169,11 @@
                     <div class="list__items-arch">
                         <div class="list__item arch">
                             <i class="fas fa-minus-square"></i>
-                            <p class="list__item-text">Cucumbers</p>
+                            <input type="text" class="list__item-text" value="Cucumbers" readonly>
                         </div>
                         <div class="list__item arch">
                             <i class="fas fa-minus-square"></i>
-                            <p class="list__item-text">Salt</p>
+                            <input type="text" class="list__item-text" value="Salt" readonly>
                         </div>
                     </div>
                 </div>
