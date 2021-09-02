@@ -27,11 +27,13 @@
                     <i class="fas fa-thumbtack"></i>
                 </div>
                 <div class="list__body">
+                    <div id="todoList" class="list__items-todo"></div>
                     <div class="list__item add">
                         <i class="fas fa-plus"></i>
-                        <input type="text" class="list__item-text" placeholder="List item">
-                        <i class="fas fa-angle-double-right"></i>
+                        <input id="addItemText" type="text" class="list__item-text" placeholder="List item">
+                        <i id="addNewItem" class="fas fa-angle-double-right"></i>
                     </div>
+                    <div class="list__items-done"></div>
                 </div>
                 <div class="list__footer">
                     <div class="list__footer-options">
@@ -76,8 +78,7 @@
                             <a href="#">Archived</a>
                         </li>
                     </ul>
-                    <!-- Спросить нужно ли делать один item со всеми кнопками, а в зависимоти 
-                        от класса (add, todo, done, arch) менять видимость определенных кнопок.-->
+                   
                     <div class="list__items-todo">
                         <div class="list__item todo">
                             <i class="fas fa-square"></i>
