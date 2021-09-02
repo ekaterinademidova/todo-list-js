@@ -33,7 +33,7 @@ function todo() {
 
 let doneHTML = item => `
     <div class="list__item done">
-        <i data-btn="undoneItem" class="fas fa-check-square"></i>
+        <i id="${item.id}" data-btn="undoneItem" class="fas fa-check-square"></i>
         <input type="text" class="list__item-text" value="${item.text}" readonly>
     </div>
 `
@@ -62,12 +62,18 @@ document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
     const id = +event.target.id
-    const item = todoListArray.find(item => item.id === id)
+    const itemTodo = todoListArray.find(item => item.id === id)
+    const itemDone = doneListArray.find(item => item.id === id)
 
     if (btnType === 'doneItem') {
         todoListArray = todoListArray.filter(item => item.id !== id)
         todo()
-        doneListArray.push(item)
+        doneListArray.push(itemTodo)
         done()
+    } else if (btnType === 'undoneItem') {
+        doneListArray = doneListArray.filter(item => item.id !== id)
+        done()
+        todoListArray.push(itemDone)
+        todo()
     }
 })
