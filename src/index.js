@@ -26,6 +26,7 @@ let todoHTML = item => `
 function todo() {
     if (todoListArray) {
         todoListArray = sortByKey(todoListArray, 'id')
+        document.querySelector('#list').classList.add('ready')
     }
     let html = todoListArray.map(todoHTML).join('')
     document.querySelector('#todoList').innerHTML = html

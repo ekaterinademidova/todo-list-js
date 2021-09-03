@@ -101,6 +101,10 @@ body {
         padding: 12px 16px;
     }
 
+    .list__nav-tabs {
+        display: none;
+    }
+
     &__items-todo {
         border-bottom: 1px solid $main-accent-color;
         padding-bottom: 5px;
