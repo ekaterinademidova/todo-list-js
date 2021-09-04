@@ -27,7 +27,7 @@
                     <i class="fas fa-thumbtack"></i>
                 </div>
                 <div class="list__body">
-                    <ul class="list__nav-tabs">
+                    <ul id="tabs" class="list__nav-tabs">
                         <li class="list__nav-item active">
                           <a href="#">Actuals</a>
                         </li>
@@ -39,7 +39,11 @@
                     <div class="list__item add">
                         <i class="fas fa-plus"></i>
                         <input id="addItemText" type="text" class="list__item-text" placeholder="List item">
-                        <i id="btnAddItem" class="fas fa-angle-double-right"></i>
+                        <i id="btnAddNewItem" class="fas fa-angle-double-right"></i>
+                    </div>
+                    <div id="dropdown" class="list__dropdown">
+                        <i id="btnShowDoneList" class="fas fa-chevron-down"></i>
+                        <input id="dropdownText" type="text" class="list__item-text" readonly/>
                     </div>
                     <div id="doneList" class="list__items-done"></div>
                 </div>

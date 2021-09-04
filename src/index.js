@@ -3,18 +3,19 @@ import './css/styles.scss'
 
 let todoListArray = []
 let doneListArray = []
+const dropdownText = ' highlighted items'
 
 let index = 0
+let status = 0
 
-function sortByKey(array, key) {
-    return array.sort(function(a, b) {
-        var x = a[key]
-        var y = b[key]
+const sortByKey = (array, key) => 
+    array.sort((a, b) => {
+        const x = a[key]
+        const y = b[key]
         return ((x < y) ? -1 : ((x > y) ? 1 : 0))
     })
-}
 
-let todoHTML = item => `
+const todoHTML = item => `
     <div class="list__item todo">
         <i id="${item.id}" data-btn="doneItem" class="fas fa-square"></i>
         <input type="text" class="list__item-text" value="${item.text}" readonly>
@@ -23,30 +24,35 @@ let todoHTML = item => `
     </div>
 `
 
-function todo() {
+const todo = () => {
     if (todoListArray) {
-        todoListArray = sortByKey(todoListArray, 'id')
-        document.querySelector('#list').classList.add('ready')
+        todoListArray = sortByKey(todoListArray, 'id')       
+        document.querySelector('#tabs').style.display = 'flex'
     }
     let html = todoListArray.map(todoHTML).join('')
     document.querySelector('#todoList').innerHTML = html
 }
 
-let doneHTML = item => `
+const doneHTML = item => `
     <div class="list__item done">
         <i id="${item.id}" data-btn="undoneItem" class="fas fa-check-square"></i>
         <input type="text" class="list__item-text" value="${item.text}" readonly>
     </div>
 `
-function done() {
-    if (doneListArray) {
-        doneListArray = sortByKey(doneListArray, 'id')
+const done = () => {
+    if (doneListArray.length) { 
+        doneListArray = sortByKey(doneListArray, 'id') 
+        document.querySelector('#dropdown').style.display = 'flex'
+        document.querySelector('#dropdownText').setAttribute('value', doneListArray.length + dropdownText)
+    }
+    else {
+        document.querySelector('#dropdown').style.display = 'none'
     }
     let html = doneListArray.map(doneHTML).join('')
     document.querySelector('#doneList').innerHTML = html
 }
 
-btnAddItem.onclick = function addItem() {
+btnAddNewItem.addEventListener('click', () => {
     let text = document.querySelector('#addItemText').value.trim()
     if (text) {
         let item = {
@@ -57,9 +63,24 @@ btnAddItem.onclick = function addItem() {
         todo()
     }
     document.querySelector('#addItemText').value = ''
-}
+})
 
-document.addEventListener('click', event => {
+btnShowDoneList.addEventListener('click', () => {
+    if (status) {
+        document.querySelector('#btnShowDoneList').classList.remove('fa-chevron-right')
+        document.querySelector('#btnShowDoneList').classList.add('fa-chevron-down')
+        document.querySelector('#doneList').style.display = 'block'
+        status++
+    }
+    else {
+        document.querySelector('#btnShowDoneList').classList.remove('fa-chevron-down')
+        document.querySelector('#btnShowDoneList').classList.add('fa-chevron-right')
+        document.querySelector('#doneList').style.display = 'none'
+        status--
+    }
+})
+
+document.addEventListener('click', (event) => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
     const id = +event.target.id

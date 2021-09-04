@@ -103,27 +103,51 @@ body {
 
     .list__nav-tabs {
         display: none;
-    }
+        padding: 0;
+        margin-bottom: 20px;
 
-    &__items-todo {
-        border-bottom: 1px solid $main-accent-color;
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-    }
+        a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: $main-accent-color;
+        }
 
-    &__items-done {
-        border-top: 1px solid $main-accent-color;
-        padding-top: 5px;
-        margin-top: 5px;
+        li {
+            width: 50%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-bottom: 1px solid $main-accent-color;
+
+            &.active {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border: 1px solid $main-accent-color;
+                border-bottom: none;
+
+                a {
+                    color: $main-text-color;
+                }
+            }
+        }
     }
 
     &__dropdown {
-        display: flex;
+        display: none;
         align-items: center;
         line-height: 30px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-top: 1px solid $main-accent-color;
 
         .fas:first-child {
             margin-right: 5px;
+        }
+
+        input {
+            border: none;
+            background: $main-bg-color;
+            color: $main-text-color;
         }
     }
 
@@ -160,6 +184,11 @@ body {
         &.arch .list__item-text {
             text-decoration: line-through;
             color: $main-accent-color;
+        }
+
+        &.add {
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
     }
 
@@ -199,39 +228,6 @@ body {
 
         &:hover {
             background: $main-accent-color;
-        }
-    }
-
-    &.ready {
-        .list__nav-tabs {
-            display: flex;
-            padding: 0;
-            margin-bottom: 20px;
-
-            a {
-                margin-top: 10px;
-                text-decoration: none;
-                color: $main-accent-color;
-            }
-
-            li {
-                width: 50%;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                border-bottom: 1px solid $main-accent-color;
-
-                &.active {
-                    border-top-left-radius: 5px;
-                    border-top-right-radius: 5px;
-                    border: 1px solid $main-accent-color;
-                    border-bottom: none;
-
-                    a {
-                        color: $main-text-color;
-                    }
-                }
-            }
         }
     }
 }
