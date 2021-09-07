@@ -2,18 +2,42 @@
 
 // Light
 $main-bg-color: white;
-$main-text-color: #202124;
-$main-accent-color: rgb(0, 0, 0, 0.2);
+$main-text-color: #575767;
+$main-accent-color: #000;
+$secondary-accent-color: #ebebeb;
 
 // Dark
-// $main-bg-color: #202124;
-// $main-text-color: #9da1a7;
-// $main-accent-color: rgba(255, 255, 255, 0.2);
+// $main-bg-color: #1e1f25;
+// $main-text-color: #dadada;
+// $main-accent-color: #fff;
+// $secondary-accent-color: #7d7d94;
 
 body {
     font-family: "Roboto", sans-serif;
     color: $main-text-color;
     background: $main-bg-color;
+}
+
+.themes {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $main-text-color;
+    border-radius: 5px;
+    background: $main-text-color;
+    width: 32px;
+    height: 32px;
+
+    &-item {
+        width: 50%;
+
+        &.active {
+            color: $main-bg-color;
+        }
+    }
 }
 
 .app {
@@ -23,29 +47,30 @@ body {
 }
 
 .wrap {
-    width: 600px;
+    width: 464px;
 }
 
 .fas:hover {
     opacity: 0.7;
 }
 
-.fa-square:hover,
 .fa-plus:hover {
     opacity: 1;
 }
 
 .list {
-    border: 1px solid $main-text-color;
+    padding: 32px;
     border-radius: 10px;
-    box-shadow: 0 3px 5px $main-accent-color;
+    box-shadow: 0 3px 5px $secondary-accent-color;
+    font-size: 18px;
+    line-height: 24px;
 
     &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 15px;
-        line-height: 32px;
+        line-height: 48px;
+        color: $main-accent-color;
     }
 
     &__title-wrap {
@@ -60,7 +85,6 @@ body {
 
         &:hover .fa-pencil-alt {
             display: block;
-            margin: 0 10px;
         }
     }
 
@@ -68,65 +92,42 @@ body {
         width: 100%;
         border: none;
         background: $main-bg-color;
-        color: $main-text-color;
+        color: $main-accent-color;
         font-weight: 700;
+        font-size: 36px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-    &__themes {
-        display: flex;
-        align-items: center;
-        border: 1px solid $main-text-color;
-        border-radius: 2px;
-        background: $main-text-color;
-        color: $main-bg-color;
-        width: 35px;
-        line-height: 18px;
-        margin-right: 10px;
-
-        &-item {
-            width: 50%;
-            border-radius: 1px;
-            margin: 1px;
-
-            &.active {
-                background: $main-bg-color;
-                color: $main-text-color;
-            }
-        }
-    }
-
     &__body {
-        padding: 12px 16px;
+        margin-top: 16px;
     }
 
-    .list__nav-tabs {
+    &__nav-tabs {
         display: none;
         padding: 0;
         margin-bottom: 20px;
 
         a {
-            margin-top: 10px;
             text-decoration: none;
-            color: $main-accent-color;
+            color: $secondary-accent-color;
         }
 
         li {
             width: 50%;
-            height: 30px;
-            line-height: 30px;
+            height: 40px;
+            line-height: 40px;
             text-align: center;
-            border-bottom: 1px solid $main-accent-color;
+            border-bottom: 1px solid $secondary-accent-color;
 
             &.active {
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
-                border: 1px solid $main-accent-color;
+                border: 1px solid $secondary-accent-color;
                 border-bottom: none;
 
                 a {
-                    color: $main-text-color;
+                    color: $main-accent-color;
                 }
             }
         }
@@ -138,10 +139,10 @@ body {
         line-height: 30px;
         padding-top: 5px;
         padding-bottom: 5px;
-        border-top: 1px solid $main-accent-color;
+        border-top: 1px solid $secondary-accent-color;
 
         .fas:first-child {
-            margin-right: 5px;
+            margin-right: 6px;
         }
 
         input {
@@ -157,18 +158,15 @@ body {
         align-items: center;
         line-height: 24px;
 
-        .fas:first-child {
-            margin-right: 5px;
-        }
-
         .fas:last-child {
-            margin-left: 10px;
+            margin-left: 6px;
         }
 
         input {
             border: none;
             background: $main-bg-color;
             color: $main-text-color;
+            margin-left: 6px;
         }
 
         &.todo .fa-edit,
@@ -183,7 +181,7 @@ body {
         &.done .list__item-text,
         &.arch .list__item-text {
             text-decoration: line-through;
-            color: $main-accent-color;
+            color: $secondary-accent-color;
         }
 
         &.add {
@@ -194,40 +192,5 @@ body {
 
     &__item-text {
         width: 100%;
-    }
-
-    &__footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 4px 0;
-    }
-
-    &__footer-options {
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        max-width: 384px;
-
-        .fas::before {
-            width: 34px;
-            height: 34px;
-            margin: 8px 9px;
-        }
-    }
-
-    &__footer-btn {
-        height: 36px;
-        width: 106px;
-        padding: 0 24px;
-        margin-right: 15px;
-        background: none;
-        border: none;
-        font-weight: 700;
-        color: $main-text-color;
-        transition: 0.2s;
-
-        &:hover {
-            background: $main-accent-color;
-        }
     }
 }

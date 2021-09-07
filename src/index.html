@@ -8,6 +8,11 @@
     <title>TODO-list</title>
 </head>
 <body>
+    <div class="themes">
+        <div class="themes-item active">
+            <i class="fas fa-moon"></i>
+        </div>
+    </div>
     <div class="app">
         <div class="wrap">
             <div id="list" class="list">
@@ -16,15 +21,6 @@
                         <input type="text" class="list__title" value="New List" readonly>
                         <i class="fas fa-pencil-alt"></i>
                     </div>
-                    <div class="list__themes">
-                        <div class="list__themes-item active">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <div class="list__themes-item">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                    </div>
-                    <i class="fas fa-thumbtack"></i>
                 </div>
                 <div class="list__body">
                     <ul id="tabs" class="list__nav-tabs">
@@ -38,7 +34,7 @@
                     <div id="todoList" class="list__items-todo"></div>
                     <div class="list__item add">
                         <i class="fas fa-plus"></i>
-                        <input id="addItemText" type="text" class="list__item-text" placeholder="List item">
+                        <input id="addItemText" type="text" class="list__item-text" placeholder="List item" autofocus>
                         <i id="btnAddNewItem" class="fas fa-angle-double-right"></i>
                     </div>
                     <div id="dropdown" class="list__dropdown">
@@ -46,162 +42,6 @@
                         <input id="dropdownText" type="text" class="list__item-text" readonly/>
                     </div>
                     <div id="doneList" class="list__items-done"></div>
-                </div>
-                <div class="list__footer">
-                    <div class="list__footer-options">
-                        <i class="fas fa-bell"></i>
-                        <i class="fas fa-user-plus"></i>
-                        <i class="fas fa-palette"></i>
-                        <i class="fas fa-image"></i>
-                        <i class="fas fa-archive"></i>
-                        <i class="fas fa-ellipsis-v"></i>
-                        <i class="fas fa-arrow-left"></i>
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <input type="button" class="list__footer-btn" value="Close">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="app">
-        <div class="wrap">
-            <div class="list ready">
-                <div class="list__header">
-                    <div class="list__title-wrap">
-                        <input type="text" class="list__title" value="Shopping list" readonly>
-                        <i class="fas fa-pencil-alt"></i>
-                    </div>
-                    <div class="list__themes">
-                        <div class="list__themes-item active">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <div class="list__themes-item">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                    </div>
-                    <i class="fas fa-thumbtack"></i>
-                </div>
-                <div class="list__body">
-                    <ul class="list__nav-tabs">
-                        <li class="list__nav-item active">
-                          <a href="#">Actuals</a>
-                        </li>
-                        <li class="list__nav-item">
-                            <a href="#">Archived</a>
-                        </li>
-                    </ul>
-                   
-                    <div class="list__items-todo">
-                        <div class="list__item todo">
-                            <i class="fas fa-square"></i>
-                            <input type="text" class="list__item-text" value="Ice cream" readonly>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="list__item todo">
-                            <i class="fas fa-square"></i>
-                            <input type="text" class="list__item-text" value="Chilli" readonly>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="list__item todo">
-                            <i class="fas fa-square"></i>
-                            <input type="text" class="list__item-text" value="Greeting card" readonly>
-                            <i class="fas fa-edit"></i>
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
-                    <div class="list__item add">
-                        <i class="fas fa-plus"></i>
-                        <input type="text" class="list__item-text" placeholder="List item">
-                        <i class="fas fa-angle-double-right"></i>
-                    </div>
-                    <div class="list__items-done">
-                        <div class="list__dropdown">
-                            <i class="fas fa-chevron-down"></i>
-                            <p class="list__dropdown-text">3 highlighted items</p>
-                        </div>
-                        <div class="list__item done">
-                            <i class="fas fa-check-square"></i>
-                            <input type="text" class="list__item-text" value="Tomatoes" readonly>
-                        </div>
-                        <div class="list__item done">
-                            <i class="fas fa-check-square"></i>
-                            <input type="text" class="list__item-text" value="Meat" readonly>
-                        </div>
-                        <div class="list__item done">
-                            <i class="fas fa-check-square"></i>
-                            <input type="text" class="list__item-text" value="Condiments" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="list__footer">
-                    <div class="list__footer-options">
-                        <i class="fas fa-bell"></i>
-                        <i class="fas fa-user-plus"></i>
-                        <i class="fas fa-palette"></i>
-                        <i class="fas fa-image"></i>
-                        <i class="fas fa-archive"></i>
-                        <i class="fas fa-ellipsis-v"></i>
-                        <i class="fas fa-arrow-left"></i>
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <input type="button" class="list__footer-btn" value="Close">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="app">
-        <div class="wrap">
-            <div class="list ready">
-                <div class="list__header">
-                    <div class="list__title-wrap">
-                        <input type="text" class="list__title" value="Shopping list" readonly>
-                        <i class="fas fa-pencil-alt"></i>
-                    </div>
-                    <div class="list__themes">
-                        <div class="list__themes-item active">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <div class="list__themes-item">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                    </div>
-                    <i class="fas fa-thumbtack"></i>
-                </div>
-                <div class="list__body">
-                    <ul class="list__nav-tabs">
-                        <li class="list__nav-item">
-                          <a href="#">Actuals</a>
-                        </li>
-                        <li class="list__nav-item active">
-                            <a href="#">Archived</a>
-                        </li>
-                    </ul>
-                    <div class="list__items-arch">
-                        <div class="list__item arch">
-                            <i class="fas fa-minus-square"></i>
-                            <input type="text" class="list__item-text" value="Cucumbers" readonly>
-                        </div>
-                        <div class="list__item arch">
-                            <i class="fas fa-minus-square"></i>
-                            <input type="text" class="list__item-text" value="Salt" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="list__footer">
-                    <div class="list__footer-options">
-                        <i class="fas fa-bell"></i>
-                        <i class="fas fa-user-plus"></i>
-                        <i class="fas fa-palette"></i>
-                        <i class="fas fa-image"></i>
-                        <i class="fas fa-archive"></i>
-                        <i class="fas fa-ellipsis-v"></i>
-                        <i class="fas fa-arrow-left"></i>
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <input type="button" class="list__footer-btn" value="Close">
                 </div>
             </div>
         </div>
