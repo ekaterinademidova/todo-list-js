@@ -25,24 +25,26 @@
                 </div>
                 <div class="list__body">
                     <ul id="tabs" class="list__nav-tabs">
-                        <li class="list__nav-item active">
+                        <li id="actuals" class="list__nav-item">
                           <a href="#">Actuals</a>
                         </li>
-                        <li class="list__nav-item">
+                        <li id="archived" class="list__nav-item">
                             <a href="#">Archived</a>
                         </li>
                     </ul>
-                    <div id="todoList" class="list__items-todo"></div>
-                    <div class="list__item add">
-                        <i class="fas fa-plus"></i>
-                        <input id="addItemText" type="text" class="list__item-text" placeholder="List item" autofocus>
-                        <i id="btnAddNewItem" class="fas fa-angle-double-right"></i>
+                    <div id="actualsInfo">
+                        <div id="todoList" class="list__items-todo"></div>
+                        <div class="list__item add">
+                            <i class="fas fa-plus"></i>
+                            <input id="addItemText" type="text" class="list__item-text" placeholder="List item" autofocus>
+                            <i id="btnAddNewItem" class="fas fa-angle-double-right"></i>
+                        </div>
+                        <div id="dropdown" class="list__dropdown">
+                            <i id="btnShowDoneList" class="fas fa-chevron-down"></i>
+                            <input id="dropdownText" type="text" class="list__item-text" readonly/>
+                        </div>
+                        <div id="doneList" class="list__items-done"></div>
                     </div>
-                    <div id="dropdown" class="list__dropdown">
-                        <i id="btnShowDoneList" class="fas fa-chevron-down"></i>
-                        <input id="dropdownText" type="text" class="list__item-text" readonly/>
-                    </div>
-                    <div id="doneList" class="list__items-done"></div>
                     <div id="archList" class="list__items-arch"></div>
                 </div>
             </div>
