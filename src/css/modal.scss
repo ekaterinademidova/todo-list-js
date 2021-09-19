@@ -3,12 +3,16 @@ $main-bg-color: white;
 $main-text-color: #575767;
 $main-accent-color: #000;
 $secondary-accent-color: #ebebeb;
+$main-overlay-color: rgba(0, 0, 0, 0.5);
+$secondary-overlay-color: rgba(0, 0, 0, 0);
 
 // Dark
 // $main-bg-color: #1e1f25;
 // $main-text-color: #dadada;
 // $main-accent-color: #fff;
 // $secondary-accent-color: #7d7d94;
+// $main-overlay-color: rgba(255, 255, 255, 0.2);
+// $secondary-overlay-color: rgba(0, 0, 0, 0);
 
 .vmodal {
     color: $main-text-color;
@@ -25,7 +29,7 @@ $secondary-accent-color: #ebebeb;
         }
 
         .modal-overlay {
-            background: rgba(0, 0, 0, 0.5);
+            background: $main-overlay-color;
         }
     }
 
@@ -41,7 +45,7 @@ $secondary-accent-color: #ebebeb;
         }
 
         .modal-overlay {
-            background: rgba(0, 0, 0, 0);
+            background: $secondary-overlay-color;
         }
     }
 }
@@ -59,7 +63,7 @@ $secondary-accent-color: #ebebeb;
         right: 0;
         left: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0);
+        background: $secondary-overlay-color;
         transition: background 0.2s ease-in;
     }
 
@@ -95,6 +99,7 @@ $secondary-accent-color: #ebebeb;
         border-top: 1px solid $secondary-accent-color;
 
         .btn {
+            color: $main-text-color;
             border-radius: 5px;
             padding: 5px 10px;
         }
