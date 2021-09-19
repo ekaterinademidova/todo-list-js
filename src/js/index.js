@@ -9,15 +9,14 @@ let archListArray = [];
 
 let index = 0;
 let statusTabs = 0;
-let tabSwitcher = 0;
 let statusDropdown = 0;
 
 const btnAddNewItem = document.querySelector('#btnAddNewItem');
 const btnShowDoneList = document.querySelector('#btnShowDoneList');
 
 const tabs = document.querySelector('#tabs');
-const actuals = document.querySelector(`#actuals`);
-const archived = document.querySelector(`#archived`);
+const actuals = document.querySelector('#actuals');
+const archived = document.querySelector('#archived');
 const actualsInfo = document.querySelector('#actualsInfo');
 const todoList = document.querySelector('#todoList');
 const dropdown = document.querySelector('#dropdown');
@@ -27,12 +26,12 @@ const archList = document.querySelector('#archList');
 
 let modal;
 const modalRemove = {
-    title: 'Удаление элемента списка', 
+    title: 'Removing a list item', 
     width: '400px',
-    content: 'Вы собираетесь удалить элемент списка. Восстановить его будет нельзя.',
+    content: 'You are about to remove a list item. It will be impossible to restore it.',
     footerButtons: [
-        {text: 'Отменить', type: 'secondary'},
-        {text: 'Удалить', type: 'danger'}
+        {text: 'Cancel', type: 'secondary'},
+        {text: 'Delete', type: 'danger'}
     ]
 }
 
@@ -80,7 +79,7 @@ const addItem = () => {
     item.focus();
 };
 
-function doneItem(id) {
+const doneItem = (id) => {
     const itemTodo = todoListArray.find(item => item.id === id);
     todoListArray = todoListArray.filter(item => item.id !== id);
     todo();
@@ -88,7 +87,7 @@ function doneItem(id) {
     done();
 }
 
-function undoneItem(id) {
+const undoneItem = (id) => {
     const itemDone = doneListArray.find(item => item.id === id);
     doneListArray = doneListArray.filter(item => item.id !== id);
     done();
@@ -96,7 +95,7 @@ function undoneItem(id) {
     todo();
 }
 
-function archItem(id) {
+const archItem = (id) => {
     const itemTodo = todoListArray.find(item => item.id === id);
     todoListArray = todoListArray.filter(item => item.id !== id);
     todo();
@@ -105,7 +104,7 @@ function archItem(id) {
     deleteModal();
 }
 
-function addModal(id) {
+const addModal = (id) => {
     _createModal(modalRemove);
     modal.classList.add('open');
     const cancel = document.querySelector(`#cancel`);
@@ -122,9 +121,9 @@ function addModal(id) {
     perform.addEventListener('click', eventPerform);
 }
 
-function deleteModal() {
+const deleteModal = () => {
     modal.classList.remove('open');
-    //modal.classList.add('hide');
+    modal.classList.add('hide');
     setTimeout(() => {
         modal.classList.remove('hide');
     }, 200)
@@ -230,7 +229,7 @@ btnShowDoneList.addEventListener('click', () => {
     }
 });
 
-function _createModal(options) {
+const _createModal = (options) => {
     const DEFAULT_WIDTH = '600px';
     modal = document.createElement('div');
     modal.classList.add('vmodal');
