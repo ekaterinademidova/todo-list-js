@@ -3,7 +3,7 @@ const HTMLPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/js/index.js',
     output: {
         filename: 'bundle.[chunkhash].js',
         path: path.resolve(__dirname, 'public')
@@ -28,6 +28,8 @@ module.exports = {
               "css-loader",
               // Compiles Sass to CSS
               "sass-loader",
+              // Source-map
+              "source-map-loader"
             ],
           },
         ],
