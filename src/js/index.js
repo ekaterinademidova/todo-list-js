@@ -1,6 +1,5 @@
 import '../css/reset.scss';
 import '../css/styles.scss';
-<<<<<<< HEAD
 import '../css/modal.scss';
 import * as layouts from './layouts'
 import * as modals from './modals'
@@ -9,11 +8,6 @@ import * as modals from './modals'
 let todoListArray = [];
 let doneListArray = [];
 let archListArray = [];
-=======
-
-let todoListArray = [];
-let doneListArray = [];
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
 
 let index = 0;
 let statusTabs = 0;
@@ -23,17 +17,13 @@ const btnAddNewItem = document.querySelector('#btnAddNewItem');
 const btnShowDoneList = document.querySelector('#btnShowDoneList');
 
 const tabs = document.querySelector('#tabs');
-<<<<<<< HEAD
 const actuals = document.querySelector('#actuals');
 const archived = document.querySelector('#archived');
 const actualsInfo = document.querySelector('#actualsInfo');
-=======
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
 const todoList = document.querySelector('#todoList');
 const dropdown = document.querySelector('#dropdown');
 const dropdownText = document.querySelector('#dropdownText');
 const doneList = document.querySelector('#doneList');
-<<<<<<< HEAD
 const archList = document.querySelector('#archList');
 
 const sortByKey = (array, key) => 
@@ -58,36 +48,19 @@ const showArchived = () => {
     archList.style.display = 'block';
 };
 archived.addEventListener('click', showArchived);
-=======
-
-const sortByKey = (array, key) => 
-    array.sort((a, b) => {
-        const x = a[key];
-        const y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    });
-
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
 
 const addItem = () => {
     if (!statusTabs) {
         tabs.style.display = 'flex';
-<<<<<<< HEAD
         actuals.classList.add('active');
         archList.style.display = 'none';
-=======
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
     }
     const item = document.querySelector('#addItemText');
     let text = item.value.trim();
     if (text) {
         let item = {
-<<<<<<< HEAD
             id: '_item_' + index++,
             //id: '_d' + uuidv4(),
-=======
-            id: index++,
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
             text: text
         };
         todoListArray.push(item);
@@ -97,7 +70,6 @@ const addItem = () => {
     item.focus();
 };
 
-<<<<<<< HEAD
 const doneItem = (id) => {
     const itemTodo = todoListArray.find(item => item.id === id);
     todoListArray = todoListArray.filter(item => item.id !== id);
@@ -121,22 +93,11 @@ const archItem = (id) => {
     archListArray.push(itemTodo);
     arch();
 }
-=======
-const todoHTML = item => `
-    <div class="list__item todo">
-        <i id="${item.id}" data-btn="doneItem" class="far fa-square"></i>
-        <input type="text" class="list__item-text" value="${item.text}" readonly>
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash"></i>
-    </div>
-`;
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
 
 const todo = () => {
     if (todoListArray.length) {
         todoListArray = sortByKey(todoListArray, 'id');       
     }
-<<<<<<< HEAD
     let html = todoListArray.map(layouts.todoHTML).join('');
     todoList.innerHTML = html;
     todoListArray.forEach((todo) => {
@@ -161,19 +122,6 @@ const todo = () => {
     });
 };
 
-=======
-    let html = todoListArray.map(todoHTML).join('');
-    todoList.innerHTML = html;
-};
-
-const doneHTML = item => `
-    <div class="list__item done">
-        <i id="${item.id}" data-btn="undoneItem" class="far fa-check-square"></i>
-        <input type="text" class="list__item-text" value="${item.text}" readonly>
-    </div>
-`;
-
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
 const done = () => {
     if (doneListArray.length) { 
         doneListArray = sortByKey(doneListArray, 'id');
@@ -183,7 +131,6 @@ const done = () => {
     else {
         dropdown.style.display = 'none';
     }
-<<<<<<< HEAD
     let html = doneListArray.map(layouts.doneHTML).join('');
     doneList.innerHTML = html;
     doneListArray.forEach((done) => {
@@ -202,10 +149,6 @@ const arch = () => {
     }
     let html = archListArray.map(layouts.archHTML).join('');
     archList.innerHTML = html;
-=======
-    let html = doneListArray.map(doneHTML).join('');
-    doneList.innerHTML = html;
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
 };
 
 btnAddNewItem.addEventListener('click', () => {
@@ -233,26 +176,3 @@ btnShowDoneList.addEventListener('click', () => {
         statusDropdown--;
     }
 });
-<<<<<<< HEAD
-=======
-
-document.addEventListener('click', (event) => {
-    event.preventDefault();
-    const btnType = event.target.dataset.btn;
-    const id = +event.target.id;
-    const itemTodo = todoListArray.find(item => item.id === id);
-    const itemDone = doneListArray.find(item => item.id === id);
-
-    if (btnType === 'doneItem') {
-        todoListArray = todoListArray.filter(item => item.id !== id);
-        todo();
-        doneListArray.push(itemTodo);
-        done();
-    } else if (btnType === 'undoneItem') {
-        doneListArray = doneListArray.filter(item => item.id !== id);
-        done();
-        todoListArray.push(itemDone);
-        todo();
-    }
-});
->>>>>>> 13aab49434d7b75dd7a421b449e1b4d910630530
