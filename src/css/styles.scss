@@ -80,12 +80,29 @@ body {
         align-items: center;
         width: 100%;
 
-        .fa-pencil-alt {
+        .fa-pencil-alt,
+        .fa-times,
+        .fa-save {
             display: none;
+        }
+
+        .fas:last-child {
+            margin-left: 6px;
         }
 
         &:hover .fa-pencil-alt {
             display: block;
+        }
+
+        &.change {
+            &:hover .fa-pencil-alt {
+                display: none;
+            }
+
+            .fa-times,
+            .fa-save {
+                display: block;
+            }
         }
     }
 
