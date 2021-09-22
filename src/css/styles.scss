@@ -1,21 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-// Light
-$main-bg-color: white;
-$main-text-color: #575767;
-$main-accent-color: #000;
-$secondary-accent-color: #ebebeb;
-
-// Dark
-// $main-bg-color: #1e1f25;
-// $main-text-color: #dadada;
-// $main-accent-color: #fff;
-// $secondary-accent-color: #7d7d94;
+:root {
+    --main-bg-color: white;
+    --main-text-color: #575767;
+    --main-accent-color: black;
+    --secondary-accent-color: #ebebeb;
+    --main-overlay-color: rgba(0, 0, 0, 0.5);
+    --secondary-overlay-color: rgba(0, 0, 0, 0);
+}
 
 body {
     font-family: "Roboto", sans-serif;
-    color: $main-text-color;
-    background: $main-bg-color;
+    color: var(--main-text-color);
+    background: var(--main-bg-color);
 }
 
 .themes {
@@ -25,9 +22,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid $main-text-color;
+    border: 1px solid var(--main-text-color);
     border-radius: 5px;
-    background: $main-text-color;
+    background: var(--main-text-color);
     width: 32px;
     height: 32px;
 
@@ -35,7 +32,7 @@ body {
         width: 50%;
 
         &.active {
-            color: $main-bg-color;
+            color: var(--main-bg-color);
         }
     }
 }
@@ -62,7 +59,7 @@ body {
 .list {
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 0 3px 5px $secondary-accent-color;
+    box-shadow: 0 3px 5px var(--secondary-accent-color);
     font-size: 18px;
     line-height: 24px;
 
@@ -71,7 +68,7 @@ body {
         justify-content: space-between;
         align-items: center;
         line-height: 48px;
-        color: $main-accent-color;
+        color: var(--main-accent-color);
     }
 
     &__title-wrap {
@@ -109,8 +106,8 @@ body {
     &__title {
         width: 100%;
         border: none;
-        background: $main-bg-color;
-        color: $main-accent-color;
+        background: var(--main-bg-color);
+        color: var(--main-accent-color);
         font-weight: 700;
         font-size: 36px;
         overflow: hidden;
@@ -128,7 +125,7 @@ body {
 
         a {
             text-decoration: none;
-            color: $secondary-accent-color;
+            color: var(--secondary-accent-color);
         }
 
         li {
@@ -136,16 +133,16 @@ body {
             height: 40px;
             line-height: 40px;
             text-align: center;
-            border-bottom: 1px solid $secondary-accent-color;
+            border-bottom: 1px solid var(--secondary-accent-color);
 
             &.active {
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
-                border: 1px solid $secondary-accent-color;
+                border: 1px solid var(--secondary-accent-color);
                 border-bottom: none;
 
                 a {
-                    color: $main-accent-color;
+                    color: var(--main-accent-color);
                 }
             }
         }
@@ -157,7 +154,7 @@ body {
         line-height: 30px;
         padding-top: 5px;
         padding-bottom: 5px;
-        border-top: 1px solid $secondary-accent-color;
+        border-top: 1px solid var(--secondary-accent-color);
 
         .fas:first-child {
             margin-right: 6px;
@@ -165,8 +162,8 @@ body {
 
         input {
             border: none;
-            background: $main-bg-color;
-            color: $main-text-color;
+            background: var(--main-bg-color);
+            color: var(--main-text-color);
         }
     }
 
@@ -183,8 +180,8 @@ body {
 
         input {
             border: none;
-            background: $main-bg-color;
-            color: $main-text-color;
+            background: var(--main-bg-color);
+            color: var(--main-text-color);
             margin-left: 6px;
         }
 
@@ -226,7 +223,7 @@ body {
         &.done .list__item-text,
         &.arch .list__item-text {
             text-decoration: line-through;
-            color: $secondary-accent-color;
+            color: var(--secondary-accent-color);
         }
 
         &.add {

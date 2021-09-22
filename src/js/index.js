@@ -14,7 +14,10 @@ let statusTabs = 0;
 let statusDropdown = 0;
 let statusEditing;
 let titleText;
+let selectedTheme = 'light';
 
+const themes = document.querySelector('#themes');
+const theme = document.querySelector('#theme');
 const addItemText = document.querySelector('#addItemText');
 const btnAddNewItem = document.querySelector('#btnAddNewItem');
 const btnShowDoneList = document.querySelector('#btnShowDoneList');
@@ -260,5 +263,30 @@ saveEditTitle.addEventListener('click', saveEdit);
 title.addEventListener('keydown', (event) => {
     if (event.code == 'Enter') {
         saveEdit();
+    }
+});
+
+themes.addEventListener('click', () => {
+    if (selectedTheme == 'light') {
+        document.documentElement.style.setProperty('--main-bg-color', '#1e1f25');
+        document.documentElement.style.setProperty('--main-text-color', '#dadada');
+        document.documentElement.style.setProperty('--main-accent-color', '#fff');
+        document.documentElement.style.setProperty('--secondary-accent-color', '#7d7d94');
+        document.documentElement.style.setProperty('--main-overlay-color', 'rgba(255, 255, 255, 0.2)');
+        document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+        theme.classList.remove('fa-moon');
+        theme.classList.add('fa-sun');
+        selectedTheme = 'dark';
+    }
+    else {
+        document.documentElement.style.setProperty('--main-bg-color', 'white');
+        document.documentElement.style.setProperty('--main-text-color', '#575767');
+        document.documentElement.style.setProperty('--main-accent-color', 'black');
+        document.documentElement.style.setProperty('--secondary-accent-color', '#ebebeb');
+        document.documentElement.style.setProperty('--main-overlay-color', 'rgba(0, 0, 0, 0.5)');
+        document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+        theme.classList.remove('fa-sun');
+        theme.classList.add('fa-moon');
+        selectedTheme = 'light';
     }
 });
