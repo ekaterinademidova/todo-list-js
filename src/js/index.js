@@ -12,7 +12,9 @@ let archListArray = [];
 let index = 0;
 let statusTabs = 0;
 let statusDropdown = 0;
+let statusEditing;
 
+const addItemText = document.querySelector('#addItemText');
 const btnAddNewItem = document.querySelector('#btnAddNewItem');
 const btnShowDoneList = document.querySelector('#btnShowDoneList');
 
@@ -55,8 +57,7 @@ const addItem = () => {
         actuals.classList.add('active');
         archList.style.display = 'none';
     }
-    const item = document.querySelector('#addItemText');
-    let text = item.value.trim();
+    let text = addItemText.value.trim();
     if (text) {
         let item = {
             id: '_item_' + index++,
@@ -66,8 +67,8 @@ const addItem = () => {
         todoListArray.push(item);
         todo();
     }
-    item.value = '';
-    item.focus();
+    addItemText.value = '';
+    addItemText.focus();
 };
 
 const doneItem = (id) => {
@@ -95,13 +96,14 @@ const archItem = (id) => {
 }
 
 const todo = () => {
+    statusEditing = false;
     if (todoListArray.length) {
         todoListArray = sortByKey(todoListArray, 'id');       
     }
     let html = todoListArray.map(layouts.todoHTML).join('');
     todoList.innerHTML = html;
     todoListArray.forEach((todo) => {
-        const performTodoItem = document.querySelector(`#todo${todo.id}`);
+        const performTodoItem = document.querySelector(`#undone${todo.id}`);
         const eventPerformItem = () => {
             doneItem(todo.id);
             performTodoItem.removeEventListener('click', eventPerformItem);
@@ -109,16 +111,68 @@ const todo = () => {
         performTodoItem.addEventListener('click', eventPerformItem);
         const archTodoItem = document.querySelector(`#arch${todo.id}`);
         const eventArchItem = () => {
-            const modal = modals.createModal(modals.remove);
-            const perform = document.querySelector(`#perform`);
-            const eventPerform = () => {
-                archItem(todo.id);
-                modals.deleteModal(modal);
-                perform.removeEventListener('click', eventPerform);
-            };
-            perform.addEventListener('click', eventPerform);
+            if (!statusEditing) {
+                const modal = modals.createModal(modals.remove);
+                const perform = document.querySelector(`#perform`);
+                const eventPerform = () => {
+                    archItem(todo.id);
+                    modals.deleteModal(modal);
+                    perform.removeEventListener('click', eventPerform);
+                };
+                perform.addEventListener('click', eventPerform);
+            }
         };
         archTodoItem.addEventListener('click', eventArchItem);
+        const editTodoItem = document.querySelector(`#edit${todo.id}`);
+        const eventEditItem = () => {
+            if (!statusEditing) {
+                statusEditing = true;
+                const itemText = document.querySelector(`#text${todo.id}`);
+                const text = itemText.value;
+                itemText.removeAttribute('readonly');
+                itemText.focus();
+                itemText.selectionStart = itemText.value.length;
+                const item = document.querySelector(`#${todo.id}`);
+                item.classList.add('edit');
+                const cancel = () => {
+                    item.classList.remove('edit');
+                    itemText.setAttribute('readonly', true);
+                    statusEditing = false;
+                };
+                const showBtn = (show) => {
+                    const elements = document.getElementsByClassName("list__item todo");
+                    for (let i = 0; i < elements.length; i++) {
+                        if (show) {
+                            elements[i].classList.remove('hide');
+                        } else {
+                            elements[i].classList.add('hide');
+                        }
+                    }
+                };
+                showBtn(false);
+                const cancelEdit = document.querySelector(`#cancel${todo.id}`);
+                const eventCancelEdit = () => {
+                    itemText.value = text;
+                    cancel();
+                    showBtn(true);
+                };
+                cancelEdit.addEventListener('click', eventCancelEdit);
+                const saveEdit = document.querySelector(`#save${todo.id}`);
+                const eventSaveEdit = () => {
+                    const index = todoListArray.findIndex((item => item.id === todo.id));
+                    todoListArray[index].text = itemText.value;
+                    cancel();
+                    showBtn(true);
+                };
+                saveEdit.addEventListener('click', eventSaveEdit);
+                itemText.addEventListener('keydown', (event) => {
+                    if (event.code == 'Enter') {
+                        eventSaveEdit();
+                    }
+                });
+            }
+        };
+        editTodoItem.addEventListener('click', eventEditItem);
     });
 };
 
@@ -134,7 +188,7 @@ const done = () => {
     let html = doneListArray.map(layouts.doneHTML).join('');
     doneList.innerHTML = html;
     doneListArray.forEach((done) => {
-        const doneItem = document.querySelector(`#${done.id}`);
+        const doneItem = document.querySelector(`#done${done.id}`);
         const eventCancelItem = () => {
             undoneItem(done.id);
             doneItem.removeEventListener('click', eventCancelItem);
@@ -156,7 +210,7 @@ btnAddNewItem.addEventListener('click', () => {
     addItem();
 });
 
-document.addEventListener('keydown', (event) => {
+addItemText.addEventListener('keydown', (event) => {
     if (event.code == 'Enter') {
         addItem();
     }
