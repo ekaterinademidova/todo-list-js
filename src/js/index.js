@@ -13,11 +13,16 @@ let index = 0;
 let statusTabs = 0;
 let statusDropdown = 0;
 let statusEditing;
+let titleText;
 
 const addItemText = document.querySelector('#addItemText');
 const btnAddNewItem = document.querySelector('#btnAddNewItem');
 const btnShowDoneList = document.querySelector('#btnShowDoneList');
-
+const editTitle = document.querySelector('#editTitle');
+const cancelEditTitle = document.querySelector('#cancelEditTitle');
+const saveEditTitle = document.querySelector('#saveEditTitle');
+const title = document.querySelector('#title');
+const titleWrap = document.querySelector('#titleWrap');
 const tabs = document.querySelector('#tabs');
 const actuals = document.querySelector('#actuals');
 const archived = document.querySelector('#archived');
@@ -228,5 +233,32 @@ btnShowDoneList.addEventListener('click', () => {
         btnShowDoneList.classList.add('fa-chevron-right');
         doneList.style.display = 'none';
         statusDropdown--;
+    }
+});
+
+editTitle.addEventListener('click', () => {
+    titleText = title.value;
+    title.removeAttribute('readonly');
+    title.focus();
+    title.selectionStart = title.value.length;
+    titleWrap.classList.add('change');
+});
+
+const cancelEdit = () => {
+    title.value = titleText;
+    title.setAttribute('readonly', true);
+    titleWrap.classList.remove('change');
+};
+cancelEditTitle.addEventListener('click', cancelEdit);
+
+const saveEdit = () => {
+    titleText = title.value;
+    cancelEdit();
+};
+saveEditTitle.addEventListener('click', saveEdit);
+
+title.addEventListener('keydown', (event) => {
+    if (event.code == 'Enter') {
+        saveEdit();
     }
 });
