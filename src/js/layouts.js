@@ -21,5 +21,6 @@ export const archHTML = item => `
     <div id="${item.id}" class="list__item arch">
         <i class="far fa-minus-square"></i>
         <input type="text" class="list__item-text" value="${item.text}" readonly>
+        <i id="arch${item.id}" class="fas fa-undo-alt"></i>
     </div>
 `;

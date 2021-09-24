@@ -1,7 +1,7 @@
 export const remove = {
     title: 'Removing a list item', 
     width: '400px',
-    content: 'You are about to remove a list item. It will be impossible to restore it.',
+    content: 'You are about to remove a list item. It will be possible to restore it from the list of archived items.',
     footerButtons: [
         {text: 'Cancel', type: 'secondary'},
         {text: 'Delete', type: 'danger'}

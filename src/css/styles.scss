@@ -226,6 +226,14 @@ body {
             color: var(--secondary-accent-color);
         }
 
+        &.arch .fa-undo-alt {
+            display: none;
+        }
+
+        &.arch:hover .fa-undo-alt {
+            display: block;
+        }
+
         &.add {
             padding-top: 10px;
             padding-bottom: 10px;

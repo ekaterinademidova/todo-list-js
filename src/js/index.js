@@ -40,7 +40,7 @@ const dropdownText = document.querySelector('#dropdownText');
 const doneList = document.querySelector('#doneList');
 const archList = document.querySelector('#archList');
 
-const sortByKey = (array, key) => 
+const sortByKey = (array, key) =>
     array.sort((a, b) => {
         const x = +a[key].replace(/\D/g,'');
         const y = +b[key].replace(/\D/g,'');
@@ -89,7 +89,7 @@ const doneItem = (id) => {
     todo();
     doneListArray.push(itemTodo);
     done();
-}
+};
 
 const undoneItem = (id) => {
     const itemDone = doneListArray.find(item => item.id === id);
@@ -97,7 +97,7 @@ const undoneItem = (id) => {
     done();
     todoListArray.push(itemDone);
     todo();
-}
+};
 
 const archItem = (id) => {
     const itemTodo = todoListArray.find(item => item.id === id);
@@ -105,7 +105,15 @@ const archItem = (id) => {
     todo();
     archListArray.push(itemTodo);
     arch();
-}
+};
+
+const restoreItem = (id) => {
+    const itemArch = archListArray.find(item => item.id === id);
+    archListArray = archListArray.filter(item => item.id !== id);
+    arch();
+    todoListArray.push(itemArch);
+    todo();
+};
 
 const cancel = (item, itemText) => {
     item.classList.remove('edit');
@@ -180,7 +188,7 @@ const todo = () => {
                 const item = document.querySelector(`#${todo.id}`);
                 item.classList.add('edit');
                 showBtn(false);
-                
+
                 const cancelEdit = document.querySelector(`#cancel${todo.id}`);
                 cancelEdit.addEventListener('click', function(){eventCancelEdit(item, itemText, text)});
 
@@ -225,6 +233,14 @@ const arch = () => {
     }
     let html = archListArray.map(layouts.archHTML).join('');
     archList.innerHTML = html;
+    archListArray.forEach((arch) => {
+        const archItem = document.querySelector(`#arch${arch.id}`);
+        const eventRestoreItem = () => {
+            restoreItem(arch.id);
+            archItem.removeEventListener('click', eventRestoreItem);
+        };
+        archItem.addEventListener('click', eventRestoreItem);
+    });
 };
 
 btnAddNewItem.addEventListener('click', () => {
