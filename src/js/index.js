@@ -5,24 +5,20 @@ import * as layouts from './layouts'
 import * as modals from './modals'
 //import { v4 as uuidv4 } from 'uuid';
 
-let todoListArray = [];
-let doneListArray = [];
-let archListArray = [];
+let todoListArray = JSON.parse(localStorage.getItem('todoListArray') || '[]');
+let doneListArray = JSON.parse(localStorage.getItem('doneListArray') || '[]');
+let archListArray = JSON.parse(localStorage.getItem('archListArray') || '[]');
 
-let index = 0;
-let statusTabs = 0;
-let statusDropdown = 0;
+let index = localStorage.getItem('index') || '0';
+let statusTabs = localStorage.getItem('statusTabs') || 'false';
+let selectedTab = localStorage.getItem('selectedTab') || 'actuals';
+let statusDropdown = localStorage.getItem('statusDropdown') || 'true';
+let titleText = localStorage.getItem('titleText') || 'New List';
+let selectedTheme = localStorage.getItem('selectedTheme') || 'light';
 let statusEditing;
-let titleText;
-let selectedTheme = 'light';
 
 const themes = document.querySelector('#themes');
 const theme = document.querySelector('#theme');
-
-const addItemText = document.querySelector('#addItemText');
-const btnAddNewItem = document.querySelector('#btnAddNewItem');
-
-const btnShowDoneList = document.querySelector('#btnShowDoneList');
 
 const editTitle = document.querySelector('#editTitle');
 const cancelEditTitle = document.querySelector('#cancelEditTitle');
@@ -34,9 +30,15 @@ const tabs = document.querySelector('#tabs');
 const actuals = document.querySelector('#actuals');
 const archived = document.querySelector('#archived');
 const actualsInfo = document.querySelector('#actualsInfo');
-const todoList = document.querySelector('#todoList');
+
+const addItemText = document.querySelector('#addItemText');
+const btnAddNewItem = document.querySelector('#btnAddNewItem');
+
 const dropdown = document.querySelector('#dropdown');
 const dropdownText = document.querySelector('#dropdownText');
+const btnShowDoneList = document.querySelector('#btnShowDoneList');
+
+const todoList = document.querySelector('#todoList');
 const doneList = document.querySelector('#doneList');
 const archList = document.querySelector('#archList');
 
@@ -47,11 +49,19 @@ const sortByKey = (array, key) =>
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
 
+const showTabs = () => {
+    tabs.style.display = 'flex';
+    actuals.classList.add('active');
+    archList.style.display = 'none';
+};
+
 const showActuals = () => {
     archived.classList.remove('active');
     actuals.classList.add('active');
     actualsInfo.style.display = 'block';
     archList.style.display = 'none';
+    selectedTab = 'actuals';
+    localStorage.setItem('selectedTab', selectedTab);
 };
 actuals.addEventListener('click', showActuals);
 
@@ -60,14 +70,16 @@ const showArchived = () => {
     archived.classList.add('active');
     actualsInfo.style.display = 'none';
     archList.style.display = 'block';
+    selectedTab = 'archived';
+    localStorage.setItem('selectedTab', selectedTab);
 };
 archived.addEventListener('click', showArchived);
 
 const addItem = () => {
     if (!statusTabs) {
-        tabs.style.display = 'flex';
-        actuals.classList.add('active');
-        archList.style.display = 'none';
+        showTabs();
+        statusTabs = true;
+        localStorage.setItem('statusTabs', statusTabs); 
     }
     let text = addItemText.value.trim();
     if (text) {
@@ -76,11 +88,25 @@ const addItem = () => {
             //id: '_d' + uuidv4(),
             text: text
         };
+        localStorage.setItem('index', index);
         todoListArray.push(item);
         todo();
     }
     addItemText.value = '';
     addItemText.focus();
+};
+btnAddNewItem.addEventListener('click', addItem);
+
+const openDropdown = () => {
+    btnShowDoneList.classList.remove('fa-chevron-right');
+    btnShowDoneList.classList.add('fa-chevron-down');
+    doneList.style.display = 'block';
+};
+
+const closeDropdown = () => {
+    btnShowDoneList.classList.remove('fa-chevron-down');
+    btnShowDoneList.classList.add('fa-chevron-right');
+    doneList.style.display = 'none';
 };
 
 const doneItem = (id) => {
@@ -204,6 +230,7 @@ const todo = () => {
         };
         editTodoItem.addEventListener('click', eventEditItem);
     });
+    localStorage.setItem('todoListArray', JSON.stringify(todoListArray));
 };
 
 const done = () => {
@@ -225,6 +252,7 @@ const done = () => {
         };
         doneItem.addEventListener('click', eventCancelItem);
     });
+    localStorage.setItem('doneListArray', JSON.stringify(doneListArray));
 };
 
 const arch = () => {
@@ -241,12 +269,8 @@ const arch = () => {
         };
         archItem.addEventListener('click', eventRestoreItem);
     });
+    localStorage.setItem('archListArray', JSON.stringify(archListArray));
 };
-
-btnAddNewItem.addEventListener('click', () => {
-    statusTabs++;
-    addItem();
-});
 
 addItemText.addEventListener('keydown', (event) => {
     if (event.code == 'Enter') {
@@ -256,17 +280,14 @@ addItemText.addEventListener('keydown', (event) => {
 
 btnShowDoneList.addEventListener('click', () => {
     if (statusDropdown) {
-        btnShowDoneList.classList.remove('fa-chevron-right');
-        btnShowDoneList.classList.add('fa-chevron-down');
-        doneList.style.display = 'block';
-        statusDropdown++;
+        closeDropdown();
+        statusDropdown = false;
     }
     else {
-        btnShowDoneList.classList.remove('fa-chevron-down');
-        btnShowDoneList.classList.add('fa-chevron-right');
-        doneList.style.display = 'none';
-        statusDropdown--;
+        openDropdown();
+        statusDropdown = true;
     }
+    localStorage.setItem('statusDropdown', statusDropdown);
 });
 
 editTitle.addEventListener('click', () => {
@@ -281,6 +302,7 @@ const cancelEdit = () => {
     title.value = titleText;
     title.setAttribute('readonly', true);
     titleWrap.classList.remove('change');
+    localStorage.setItem('titleText', titleText);
 };
 cancelEditTitle.addEventListener('click', cancelEdit);
 
@@ -296,27 +318,66 @@ title.addEventListener('keydown', (event) => {
     }
 });
 
+const lightTheme = () => {
+    document.documentElement.style.setProperty('--main-bg-color', 'white');
+    document.documentElement.style.setProperty('--main-text-color', '#575767');
+    document.documentElement.style.setProperty('--main-accent-color', 'black');
+    document.documentElement.style.setProperty('--secondary-accent-color', '#ebebeb');
+    document.documentElement.style.setProperty('--main-overlay-color', 'rgba(0, 0, 0, 0.5)');
+    document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+    theme.classList.remove('fa-sun');
+    theme.classList.add('fa-moon');
+};
+
+const darkTheme = () => {
+    document.documentElement.style.setProperty('--main-bg-color', '#1e1f25');
+    document.documentElement.style.setProperty('--main-text-color', '#dadada');
+    document.documentElement.style.setProperty('--main-accent-color', '#fff');
+    document.documentElement.style.setProperty('--secondary-accent-color', '#7d7d94');
+    document.documentElement.style.setProperty('--main-overlay-color', 'rgba(255, 255, 255, 0.2)');
+    document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+    theme.classList.remove('fa-moon');
+    theme.classList.add('fa-sun');
+};
+
 themes.addEventListener('click', () => {
     if (selectedTheme == 'light') {
-        document.documentElement.style.setProperty('--main-bg-color', '#1e1f25');
-        document.documentElement.style.setProperty('--main-text-color', '#dadada');
-        document.documentElement.style.setProperty('--main-accent-color', '#fff');
-        document.documentElement.style.setProperty('--secondary-accent-color', '#7d7d94');
-        document.documentElement.style.setProperty('--main-overlay-color', 'rgba(255, 255, 255, 0.2)');
-        document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
-        theme.classList.remove('fa-moon');
-        theme.classList.add('fa-sun');
+        darkTheme();
         selectedTheme = 'dark';
     }
     else {
-        document.documentElement.style.setProperty('--main-bg-color', 'white');
-        document.documentElement.style.setProperty('--main-text-color', '#575767');
-        document.documentElement.style.setProperty('--main-accent-color', 'black');
-        document.documentElement.style.setProperty('--secondary-accent-color', '#ebebeb');
-        document.documentElement.style.setProperty('--main-overlay-color', 'rgba(0, 0, 0, 0.5)');
-        document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
-        theme.classList.remove('fa-sun');
-        theme.classList.add('fa-moon');
+        lightTheme();
         selectedTheme = 'light';
     }
+    localStorage.setItem('selectedTheme', selectedTheme);
 });
+
+todo();
+done();
+arch();
+
+title.value = titleText;
+
+if (statusTabs) {
+    showTabs();
+    if (selectedTab == 'actuals') {
+        showActuals();
+    }
+    else {
+        showArchived();
+    }
+}
+
+if (statusDropdown) {
+    openDropdown();
+}
+else {
+    closeDropdown();
+}
+
+if (selectedTheme == 'light') {
+    lightTheme();
+}
+else {
+    darkTheme();
+}
