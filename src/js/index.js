@@ -9,6 +9,7 @@ let todoListArray = JSON.parse(localStorage.getItem('todoListArray') || '[]');
 let doneListArray = JSON.parse(localStorage.getItem('doneListArray') || '[]');
 let archListArray = JSON.parse(localStorage.getItem('archListArray') || '[]');
 
+<<<<<<< HEAD
 let index = localStorage.getItem('index') || '0';
 let statusTabs = localStorage.getItem('statusTabs') || 'false';
 let selectedTab = localStorage.getItem('selectedTab') || 'actuals';
@@ -16,9 +17,30 @@ let statusDropdown = localStorage.getItem('statusDropdown') || 'true';
 let titleText = localStorage.getItem('titleText') || 'New List';
 let selectedTheme = localStorage.getItem('selectedTheme') || 'light';
 let statusEditing;
+=======
+let index = 0;
+let statusTabs = 0;
+let statusDropdown = 0;
+let statusEditing;
+let titleText;
+let selectedTheme = 'light';
+>>>>>>> 59228d04e2331a49bb703ff7248094fcd6d6b541
 
 const themes = document.querySelector('#themes');
 const theme = document.querySelector('#theme');
+
+<<<<<<< HEAD
+const editTitle = document.querySelector('#editTitle');
+const cancelEditTitle = document.querySelector('#cancelEditTitle');
+const saveEditTitle = document.querySelector('#saveEditTitle');
+const title = document.querySelector('#title');
+const titleWrap = document.querySelector('#titleWrap');
+=======
+const addItemText = document.querySelector('#addItemText');
+const btnAddNewItem = document.querySelector('#btnAddNewItem');
+
+const btnShowDoneList = document.querySelector('#btnShowDoneList');
+>>>>>>> 59228d04e2331a49bb703ff7248094fcd6d6b541
 
 const editTitle = document.querySelector('#editTitle');
 const cancelEditTitle = document.querySelector('#cancelEditTitle');
@@ -94,6 +116,7 @@ const addItem = () => {
     }
     addItemText.value = '';
     addItemText.focus();
+<<<<<<< HEAD
 };
 btnAddNewItem.addEventListener('click', addItem);
 
@@ -107,6 +130,8 @@ const closeDropdown = () => {
     btnShowDoneList.classList.remove('fa-chevron-down');
     btnShowDoneList.classList.add('fa-chevron-right');
     doneList.style.display = 'none';
+=======
+>>>>>>> 59228d04e2331a49bb703ff7248094fcd6d6b541
 };
 
 const doneItem = (id) => {
@@ -269,9 +294,19 @@ const arch = () => {
         };
         archItem.addEventListener('click', eventRestoreItem);
     });
+<<<<<<< HEAD
     localStorage.setItem('archListArray', JSON.stringify(archListArray));
 };
 
+=======
+};
+
+btnAddNewItem.addEventListener('click', () => {
+    statusTabs++;
+    addItem();
+});
+
+>>>>>>> 59228d04e2331a49bb703ff7248094fcd6d6b541
 addItemText.addEventListener('keydown', (event) => {
     if (event.code == 'Enter') {
         addItem();
@@ -352,6 +387,7 @@ themes.addEventListener('click', () => {
     localStorage.setItem('selectedTheme', selectedTheme);
 });
 
+<<<<<<< HEAD
 todo();
 done();
 arch();
@@ -381,3 +417,56 @@ if (selectedTheme == 'light') {
 else {
     darkTheme();
 }
+=======
+editTitle.addEventListener('click', () => {
+    titleText = title.value;
+    title.removeAttribute('readonly');
+    title.focus();
+    title.selectionStart = title.value.length;
+    titleWrap.classList.add('change');
+});
+
+const cancelEdit = () => {
+    title.value = titleText;
+    title.setAttribute('readonly', true);
+    titleWrap.classList.remove('change');
+};
+cancelEditTitle.addEventListener('click', cancelEdit);
+
+const saveEdit = () => {
+    titleText = title.value;
+    cancelEdit();
+};
+saveEditTitle.addEventListener('click', saveEdit);
+
+title.addEventListener('keydown', (event) => {
+    if (event.code == 'Enter') {
+        saveEdit();
+    }
+});
+
+themes.addEventListener('click', () => {
+    if (selectedTheme == 'light') {
+        document.documentElement.style.setProperty('--main-bg-color', '#1e1f25');
+        document.documentElement.style.setProperty('--main-text-color', '#dadada');
+        document.documentElement.style.setProperty('--main-accent-color', '#fff');
+        document.documentElement.style.setProperty('--secondary-accent-color', '#7d7d94');
+        document.documentElement.style.setProperty('--main-overlay-color', 'rgba(255, 255, 255, 0.2)');
+        document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+        theme.classList.remove('fa-moon');
+        theme.classList.add('fa-sun');
+        selectedTheme = 'dark';
+    }
+    else {
+        document.documentElement.style.setProperty('--main-bg-color', 'white');
+        document.documentElement.style.setProperty('--main-text-color', '#575767');
+        document.documentElement.style.setProperty('--main-accent-color', 'black');
+        document.documentElement.style.setProperty('--secondary-accent-color', '#ebebeb');
+        document.documentElement.style.setProperty('--main-overlay-color', 'rgba(0, 0, 0, 0.5)');
+        document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+        theme.classList.remove('fa-sun');
+        theme.classList.add('fa-moon');
+        selectedTheme = 'light';
+    }
+});
+>>>>>>> 59228d04e2331a49bb703ff7248094fcd6d6b541
