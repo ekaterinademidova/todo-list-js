@@ -26,12 +26,6 @@ const saveEditTitle = document.querySelector('#saveEditTitle');
 const title = document.querySelector('#title');
 const titleWrap = document.querySelector('#titleWrap');
 
-const editTitle = document.querySelector('#editTitle');
-const cancelEditTitle = document.querySelector('#cancelEditTitle');
-const saveEditTitle = document.querySelector('#saveEditTitle');
-const title = document.querySelector('#title');
-const titleWrap = document.querySelector('#titleWrap');
-
 const tabs = document.querySelector('#tabs');
 const actuals = document.querySelector('#actuals');
 const archived = document.querySelector('#archived');
