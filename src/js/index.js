@@ -222,7 +222,7 @@ const todo = () => {
                 saveEdit.addEventListener('click', function(){eventSaveEdit(todo.id, item, itemText)});
 
                 itemText.addEventListener('keydown', (event) => {
-                    if (event.code == 'Enter') {
+                    if (event.code == 'Enter' || event.code == 'NumpadEnter') {
                         eventSaveEdit(todo.id, item, itemText);
                     }
                 });
@@ -273,7 +273,7 @@ const arch = () => {
 };
 
 addItemText.addEventListener('keydown', (event) => {
-    if (event.code == 'Enter') {
+    if (event.code == 'Enter' || event.code == 'NumpadEnter') {
         addItem();
     }
 });
@@ -313,7 +313,7 @@ const saveEdit = () => {
 saveEditTitle.addEventListener('click', saveEdit);
 
 title.addEventListener('keydown', (event) => {
-    if (event.code == 'Enter') {
+    if (event.code == 'Enter' || event.code == 'NumpadEnter') {
         saveEdit();
     }
 });
