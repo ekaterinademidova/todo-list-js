@@ -9,10 +9,10 @@ let todoListArray = JSON.parse(localStorage.getItem('todoListArray') || '[]');
 let doneListArray = JSON.parse(localStorage.getItem('doneListArray') || '[]');
 let archListArray = JSON.parse(localStorage.getItem('archListArray') || '[]');
 
-let index = localStorage.getItem('index') || '0';
-let statusTabs = localStorage.getItem('statusTabs') || 'false';
+let index = JSON.parse(localStorage.getItem('index') || 0);
+let statusTabs = JSON.parse(localStorage.getItem('statusTabs') || false);
 let selectedTab = localStorage.getItem('selectedTab') || 'actuals';
-let statusDropdown = localStorage.getItem('statusDropdown') || 'true';
+let statusDropdown = JSON.parse(localStorage.getItem('statusDropdown') || true);
 let titleText = localStorage.getItem('titleText') || 'New List';
 let selectedTheme = localStorage.getItem('selectedTheme') || 'light';
 let statusEditing;
