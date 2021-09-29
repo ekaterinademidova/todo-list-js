@@ -8,6 +8,16 @@ export const remove = {
     ]
 };
 
+export const restore = {
+    title: 'Restore a list item', 
+    width: '400px',
+    content: 'You are about to restore a list item.',
+    footerButtons: [
+        {text: 'Cancel', type: 'secondary'},
+        {text: 'Restore', type: 'danger'}
+    ]
+};
+
 export const createModal = (options) => {
     const DEFAULT_WIDTH = '600px';
     let modal = document.createElement('div');
