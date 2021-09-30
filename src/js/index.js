@@ -52,7 +52,6 @@ const sortByKey = (array, key) =>
 const showTabs = () => {
     tabs.style.display = 'flex';
     actuals.classList.add('active');
-    archList.style.display = 'none';
 };
 
 const showActuals = () => {
@@ -191,7 +190,7 @@ const todo = () => {
             if (!statusEditing) {
                 const modal = modals.createModal(modals.remove);
 
-                const perform = document.querySelector(`#perform`);
+                const perform = document.querySelector('#perform');
                 const eventPerform = () => {
                     archItem(todo.id);
                     modals.deleteModal(modal);
@@ -258,18 +257,32 @@ const done = () => {
 const arch = () => {
     if (archListArray.length) { 
         archListArray = sortByKey(archListArray, 'id');
+
+        let html = archListArray.map(layouts.archHTML).join('');
+        archList.innerHTML = html;
+        archListArray.forEach((arch) => {
+            const restItem = document.querySelector(`#restore${arch.id}`);
+            const eventRestoreItem = () => {
+                const modal = modals.createModal(modals.restore);
+
+                const perform = document.querySelector('#perform');
+                const eventPerform = () => {
+                    restoreItem(arch.id);
+                    modals.deleteModal(modal);
+                    perform.removeEventListener('click', eventPerform);
+                };
+                perform.addEventListener('click', eventPerform);
+            };
+            restItem.addEventListener('click', eventRestoreItem);
+        });
+        localStorage.setItem('archListArray', JSON.stringify(archListArray));
+    } else {
+        archList.innerHTML = `
+            <div>
+                The list is currently empty.
+            </div>`;
     }
-    let html = archListArray.map(layouts.archHTML).join('');
-    archList.innerHTML = html;
-    archListArray.forEach((arch) => {
-        const archItem = document.querySelector(`#arch${arch.id}`);
-        const eventRestoreItem = () => {
-            restoreItem(arch.id);
-            archItem.removeEventListener('click', eventRestoreItem);
-        };
-        archItem.addEventListener('click', eventRestoreItem);
-    });
-    localStorage.setItem('archListArray', JSON.stringify(archListArray));
+    
 };
 
 addItemText.addEventListener('keydown', (event) => {
