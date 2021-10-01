@@ -1,7 +1,6 @@
 export const todoHTML = item => `
     <div id="${item.id}" class="list__item todo">
         <i id="undone${item.id}" class="far fa-square"></i>
-        <i class="fas fa-spinner"></i>
         <input id="text${item.id}" type="text" class="list__item-text" value="${item.text}" readonly>
         <i id="edit${item.id}" class="fas fa-edit"></i>
         <i id="arch${item.id}" class="fas fa-trash"></i>

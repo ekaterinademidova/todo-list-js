@@ -2,9 +2,9 @@
 
 :root {
     --main-bg-color: white;
-    --main-text-color: #575767;
-    --main-accent-color: black;
-    --secondary-accent-color: #ebebeb;
+    --main-text-color: #4b4b4b;
+    --main-accent-color: #3a3a3a;
+    --secondary-accent-color: #adadad;
     --main-overlay-color: rgba(0, 0, 0, 0.5);
     --secondary-overlay-color: rgba(0, 0, 0, 0);
 }
@@ -47,19 +47,22 @@ body {
     width: 464px;
 }
 
-.fas:hover {
+.fas:hover,
+.far:hover {
     opacity: 0.7;
+    cursor: pointer;
 }
 
-.fa-plus:hover,
-.fa-spinner:hover {
+.fa-plus:hover {
     opacity: 1;
+    cursor: default;
 }
 
 .list {
     padding: 32px;
+    border: 1px solid var(--main-text-color);
     border-radius: 10px;
-    box-shadow: 0 3px 5px var(--secondary-accent-color);
+    box-shadow: 0 0 8px var(--secondary-accent-color);
     font-size: 18px;
     line-height: 24px;
 
@@ -142,7 +145,7 @@ body {
                 border-bottom: none;
 
                 a {
-                    color: var(--main-accent-color);
+                    color: var(--main-text-color);
                 }
             }
         }
@@ -176,6 +179,11 @@ body {
         justify-content: space-between;
         align-items: center;
         line-height: 24px;
+        padding-bottom: 5px;
+
+        &:last-child {
+            padding-bottom: 0;
+        }
 
         .fa-trash,
         .fa-save {
@@ -199,18 +207,16 @@ body {
             display: block;
         }
 
-        &.todo .fa-spinner,
-        .fa-times,
+        &.todo .fa-times,
         .fa-save {
             display: none;
         }
 
         &.todo.edit {
             .fa-square {
-                display: none;
+                color: var(--secondary-accent-color);
             }
 
-            .fa-spinner,
             .fa-times,
             .fa-save {
                 display: block;

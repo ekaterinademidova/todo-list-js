@@ -140,10 +140,11 @@ const restoreItem = (id) => {
     todo();
 };
 
-const cancel = (item, itemText) => {
+const cancel = (item, itemText, performItem) => {
     item.classList.remove('edit');
     itemText.setAttribute('readonly', true);
     statusEditing = false;
+    performItem.style.pointerEvents = 'auto';
     showBtn(true);
 };
 
@@ -158,15 +159,16 @@ const showBtn = (show) => {
     }
 };
 
-const eventCancelEdit = (item, itemText, text) => {
+const eventCancelEdit = (item, itemText, text, performItem) => {
     itemText.value = text;
-    cancel(item, itemText);
+    cancel(item, itemText, performItem);
 };
 
-const eventSaveEdit = (id, item, itemText) => {
+const eventSaveEdit = (id, item, itemText, performItem) => {
     const index = todoListArray.findIndex((item => item.id === id));
     todoListArray[index].text = itemText.value;
-    cancel(item, itemText);
+    cancel(item, itemText, performItem);
+    
 };
 
 const todo = () => {
@@ -212,17 +214,19 @@ const todo = () => {
                 itemText.selectionStart = itemText.value.length;
                 const item = document.querySelector(`#${todo.id}`);
                 item.classList.add('edit');
+                const performItem = document.querySelector(`#undone${todo.id}`);
+                performItem.style.pointerEvents = 'none';
                 showBtn(false);
 
                 const cancelEdit = document.querySelector(`#cancel${todo.id}`);
-                cancelEdit.addEventListener('click', function(){eventCancelEdit(item, itemText, text)});
+                cancelEdit.addEventListener('click', function(){eventCancelEdit(item, itemText, text, performItem)});
 
                 const saveEdit = document.querySelector(`#save${todo.id}`);
-                saveEdit.addEventListener('click', function(){eventSaveEdit(todo.id, item, itemText)});
+                saveEdit.addEventListener('click', function(){eventSaveEdit(todo.id, item, itemText, performItem)});
 
                 itemText.addEventListener('keydown', (event) => {
                     if (event.code == 'Enter' || event.code == 'NumpadEnter') {
-                        eventSaveEdit(todo.id, item, itemText);
+                        eventSaveEdit(todo.id, item, itemText, performItem);
                     }
                 });
             }
@@ -333,22 +337,22 @@ title.addEventListener('keydown', (event) => {
 
 const lightTheme = () => {
     document.documentElement.style.setProperty('--main-bg-color', 'white');
-    document.documentElement.style.setProperty('--main-text-color', '#575767');
-    document.documentElement.style.setProperty('--main-accent-color', 'black');
-    document.documentElement.style.setProperty('--secondary-accent-color', '#ebebeb');
+    document.documentElement.style.setProperty('--main-text-color', '#4b4b4b');
+    document.documentElement.style.setProperty('--main-accent-color', '#3a3a3a');
+    document.documentElement.style.setProperty('--secondary-accent-color', '#adadad');
     document.documentElement.style.setProperty('--main-overlay-color', 'rgba(0, 0, 0, 0.5)');
-    document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+    document.documentElement.style.setProperty('--secondary-overlay-color', 'rgba(0, 0, 0, 0)');
     theme.classList.remove('fa-sun');
     theme.classList.add('fa-moon');
 };
 
 const darkTheme = () => {
     document.documentElement.style.setProperty('--main-bg-color', '#1e1f25');
-    document.documentElement.style.setProperty('--main-text-color', '#dadada');
-    document.documentElement.style.setProperty('--main-accent-color', '#fff');
-    document.documentElement.style.setProperty('--secondary-accent-color', '#7d7d94');
+    document.documentElement.style.setProperty('--main-text-color', '#adadad');
+    document.documentElement.style.setProperty('--main-accent-color', '#c5c5c5');
+    document.documentElement.style.setProperty('--secondary-accent-color', '#4b4b4b');
     document.documentElement.style.setProperty('--main-overlay-color', 'rgba(255, 255, 255, 0.2)');
-    document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+    document.documentElement.style.setProperty('--secondary-overlay-color', 'rgba(0, 0, 0, 0)');
     theme.classList.remove('fa-moon');
     theme.classList.add('fa-sun');
 };
