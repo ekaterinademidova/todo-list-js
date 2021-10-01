@@ -9,10 +9,10 @@ let todoListArray = JSON.parse(localStorage.getItem('todoListArray') || '[]');
 let doneListArray = JSON.parse(localStorage.getItem('doneListArray') || '[]');
 let archListArray = JSON.parse(localStorage.getItem('archListArray') || '[]');
 
-let index = localStorage.getItem('index') || '0';
-let statusTabs = localStorage.getItem('statusTabs') || 'false';
+let index = JSON.parse(localStorage.getItem('index') || 0);
+let statusTabs = JSON.parse(localStorage.getItem('statusTabs') || false);
 let selectedTab = localStorage.getItem('selectedTab') || 'actuals';
-let statusDropdown = localStorage.getItem('statusDropdown') || 'true';
+let statusDropdown = JSON.parse(localStorage.getItem('statusDropdown') || true);
 let titleText = localStorage.getItem('titleText') || 'New List';
 let selectedTheme = localStorage.getItem('selectedTheme') || 'light';
 let statusEditing;
@@ -52,7 +52,6 @@ const sortByKey = (array, key) =>
 const showTabs = () => {
     tabs.style.display = 'flex';
     actuals.classList.add('active');
-    archList.style.display = 'none';
 };
 
 const showActuals = () => {
@@ -141,10 +140,11 @@ const restoreItem = (id) => {
     todo();
 };
 
-const cancel = (item, itemText) => {
+const cancel = (item, itemText, performItem) => {
     item.classList.remove('edit');
     itemText.setAttribute('readonly', true);
     statusEditing = false;
+    performItem.style.pointerEvents = 'auto';
     showBtn(true);
 };
 
@@ -159,15 +159,16 @@ const showBtn = (show) => {
     }
 };
 
-const eventCancelEdit = (item, itemText, text) => {
+const eventCancelEdit = (item, itemText, text, performItem) => {
     itemText.value = text;
-    cancel(item, itemText);
+    cancel(item, itemText, performItem);
 };
 
-const eventSaveEdit = (id, item, itemText) => {
+const eventSaveEdit = (id, item, itemText, performItem) => {
     const index = todoListArray.findIndex((item => item.id === id));
     todoListArray[index].text = itemText.value;
-    cancel(item, itemText);
+    cancel(item, itemText, performItem);
+    
 };
 
 const todo = () => {
@@ -191,7 +192,7 @@ const todo = () => {
             if (!statusEditing) {
                 const modal = modals.createModal(modals.remove);
 
-                const perform = document.querySelector(`#perform`);
+                const perform = document.querySelector('#perform');
                 const eventPerform = () => {
                     archItem(todo.id);
                     modals.deleteModal(modal);
@@ -213,17 +214,19 @@ const todo = () => {
                 itemText.selectionStart = itemText.value.length;
                 const item = document.querySelector(`#${todo.id}`);
                 item.classList.add('edit');
+                const performItem = document.querySelector(`#undone${todo.id}`);
+                performItem.style.pointerEvents = 'none';
                 showBtn(false);
 
                 const cancelEdit = document.querySelector(`#cancel${todo.id}`);
-                cancelEdit.addEventListener('click', function(){eventCancelEdit(item, itemText, text)});
+                cancelEdit.addEventListener('click', function(){eventCancelEdit(item, itemText, text, performItem)});
 
                 const saveEdit = document.querySelector(`#save${todo.id}`);
-                saveEdit.addEventListener('click', function(){eventSaveEdit(todo.id, item, itemText)});
+                saveEdit.addEventListener('click', function(){eventSaveEdit(todo.id, item, itemText, performItem)});
 
                 itemText.addEventListener('keydown', (event) => {
-                    if (event.code == 'Enter') {
-                        eventSaveEdit(todo.id, item, itemText);
+                    if (event.code == 'Enter' || event.code == 'NumpadEnter') {
+                        eventSaveEdit(todo.id, item, itemText, performItem);
                     }
                 });
             }
@@ -258,22 +261,36 @@ const done = () => {
 const arch = () => {
     if (archListArray.length) { 
         archListArray = sortByKey(archListArray, 'id');
+
+        let html = archListArray.map(layouts.archHTML).join('');
+        archList.innerHTML = html;
+        archListArray.forEach((arch) => {
+            const restItem = document.querySelector(`#restore${arch.id}`);
+            const eventRestoreItem = () => {
+                const modal = modals.createModal(modals.restore);
+
+                const perform = document.querySelector('#perform');
+                const eventPerform = () => {
+                    restoreItem(arch.id);
+                    modals.deleteModal(modal);
+                    perform.removeEventListener('click', eventPerform);
+                };
+                perform.addEventListener('click', eventPerform);
+            };
+            restItem.addEventListener('click', eventRestoreItem);
+        });
+        localStorage.setItem('archListArray', JSON.stringify(archListArray));
+    } else {
+        archList.innerHTML = `
+            <div>
+                The list is currently empty.
+            </div>`;
     }
-    let html = archListArray.map(layouts.archHTML).join('');
-    archList.innerHTML = html;
-    archListArray.forEach((arch) => {
-        const archItem = document.querySelector(`#arch${arch.id}`);
-        const eventRestoreItem = () => {
-            restoreItem(arch.id);
-            archItem.removeEventListener('click', eventRestoreItem);
-        };
-        archItem.addEventListener('click', eventRestoreItem);
-    });
-    localStorage.setItem('archListArray', JSON.stringify(archListArray));
+    
 };
 
 addItemText.addEventListener('keydown', (event) => {
-    if (event.code == 'Enter') {
+    if (event.code == 'Enter' || event.code == 'NumpadEnter') {
         addItem();
     }
 });
@@ -313,29 +330,29 @@ const saveEdit = () => {
 saveEditTitle.addEventListener('click', saveEdit);
 
 title.addEventListener('keydown', (event) => {
-    if (event.code == 'Enter') {
+    if (event.code == 'Enter' || event.code == 'NumpadEnter') {
         saveEdit();
     }
 });
 
 const lightTheme = () => {
     document.documentElement.style.setProperty('--main-bg-color', 'white');
-    document.documentElement.style.setProperty('--main-text-color', '#575767');
-    document.documentElement.style.setProperty('--main-accent-color', 'black');
-    document.documentElement.style.setProperty('--secondary-accent-color', '#ebebeb');
+    document.documentElement.style.setProperty('--main-text-color', '#4b4b4b');
+    document.documentElement.style.setProperty('--main-accent-color', '#3a3a3a');
+    document.documentElement.style.setProperty('--secondary-accent-color', '#adadad');
     document.documentElement.style.setProperty('--main-overlay-color', 'rgba(0, 0, 0, 0.5)');
-    document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+    document.documentElement.style.setProperty('--secondary-overlay-color', 'rgba(0, 0, 0, 0)');
     theme.classList.remove('fa-sun');
     theme.classList.add('fa-moon');
 };
 
 const darkTheme = () => {
     document.documentElement.style.setProperty('--main-bg-color', '#1e1f25');
-    document.documentElement.style.setProperty('--main-text-color', '#dadada');
-    document.documentElement.style.setProperty('--main-accent-color', '#fff');
-    document.documentElement.style.setProperty('--secondary-accent-color', '#7d7d94');
+    document.documentElement.style.setProperty('--main-text-color', '#adadad');
+    document.documentElement.style.setProperty('--main-accent-color', '#c5c5c5');
+    document.documentElement.style.setProperty('--secondary-accent-color', '#4b4b4b');
     document.documentElement.style.setProperty('--main-overlay-color', 'rgba(255, 255, 255, 0.2)');
-    document.documentElement.style.setProperty('--secondary-overlay-color', 'black');
+    document.documentElement.style.setProperty('--secondary-overlay-color', 'rgba(0, 0, 0, 0)');
     theme.classList.remove('fa-moon');
     theme.classList.add('fa-sun');
 };
