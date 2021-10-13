@@ -75,13 +75,13 @@ const showArchived = () => {
 archived.addEventListener('click', showArchived);
 
 const addItem = () => {
-    if (!statusTabs) {
-        showTabs();
-        statusTabs = true;
-        localStorage.setItem('statusTabs', statusTabs); 
-    }
     let text = addItemText.value.trim();
     if (text) {
+        if (!statusTabs) {
+            showTabs();
+            statusTabs = true;
+            localStorage.setItem('statusTabs', statusTabs); 
+        }
         let item = {
             id: '_item_' + index++,
             //id: '_d' + uuidv4(),
