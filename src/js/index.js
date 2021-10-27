@@ -233,8 +233,14 @@ const todo = () => {
         };
         editTodoItem.addEventListener('click', eventEditItem);
     });
-    localStorage.setItem('todoListArray', JSON.stringify(todoListArray));
+    saveChanges();
 };
+
+const saveChanges = () => {
+    localStorage.setItem('todoListArray', JSON.stringify(todoListArray));
+    localStorage.setItem('doneListArray', JSON.stringify(doneListArray));
+    localStorage.setItem('archListArray', JSON.stringify(archListArray));
+}
 
 const done = () => {
     if (doneListArray.length) { 
@@ -255,7 +261,7 @@ const done = () => {
         };
         doneItem.addEventListener('click', eventCancelItem);
     });
-    localStorage.setItem('doneListArray', JSON.stringify(doneListArray));
+    saveChanges();
 };
 
 const arch = () => {
@@ -279,7 +285,7 @@ const arch = () => {
             };
             restItem.addEventListener('click', eventRestoreItem);
         });
-        localStorage.setItem('archListArray', JSON.stringify(archListArray));
+        saveChanges();
     } else {
         archList.innerHTML = `
             <div>
